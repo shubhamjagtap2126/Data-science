@@ -1,0 +1,71 @@
+---
+title: "Sample dataset assignment 2"
+author: "Shubham jagtap"
+date: "10/3/2019"
+output: html_notebook
+---
+
+
+### Import data
+importing [dataset](https://www.imdb.com/list/ls053826112/) of **Most Watched Movies Of All Time**
+
+**number of rows in data = 1000**
+
+```{r}
+# importing libraries
+pacman::p_load(tidyverse, dplyr, ggplot2,shiny, shinydashboard, leaflet,
+               rvest, stringr, lubridate, rmarkdown, knitr)
+
+# importing dataset of Locations of Earthquakes off Fiji
+
+url <- 'https://www.imdb.com/list/ls053826112/'
+# <- head(data)
+webpage <- read_html(url)
+```
+
+```{r}
+# sample process of scraping the rank data
+# https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/
+
+rank <- webpage %>% html_nodes('.text-primary') %>% 
+        html_text() %>%  as.numeric()
+
+title <-  webpage %>% html_nodes('.lister-item-header a') %>% 
+          html_text()
+
+runtimeMin <- webpage %>% html_nodes('.text-muted .runtime') %>%  
+            html_text() %>% {gsub(" min","",.)} %>% as.numeric()
+
+genre <-  webpage %>% html_nodes('.genre') %>% html_text() %>%
+          {gsub("\n","",.)} %>% {gsub(" ","",.)} #%>% 
+          #{gsub(",.*","",.)} #%>% as.factor() #take only first genre of each
+
+ratings <- webpage %>% html_nodes('.imdb-rating') %>% 
+        html_text() %>%  as.numeric()
+
+
+votes <- webpage %>% html_nodes('.span:nth-child(2)') %>% html_text() %>%             {gsub(",","",.)} %>% as.numeric()
+
+data <- data.frame(rank, title, runtimeMin, genre) #ratings, votes
+data <- tbl_df(data)
+# head(rank)
+```
+
+
+***
+
+**Frequent questions based on the dataset**
+
+1. 
+    1.
+2.
+
+**Frequent questions other than dataset**
+
+1. 
+    1.
+2.
+
+
+
+

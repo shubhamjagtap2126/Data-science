@@ -1,0 +1,17 @@
+### to change csv to Excel
+# filenames <- list.files("D:/finished CSVs", pattern="*.csv", full.names=TRUE)
+filenames <- list.files( pattern="*.csv", full.names=TRUE)
+
+for(i in filenames){
+  a <- read.csv(i)
+  new_name <- sub('.csv', '.xlsx', i, fixed = TRUE)
+  write_xlsx(a, new_name)}
+
+### to change excel to CSV
+# filenames <- list.files("D:/finished CSVs", pattern="*.xlsx", full.names=TRUE)
+filenames <- list.files("D:\\Careermitra\\01_Raw Scores\\Maha 2018 Raw" ,pattern="*.xlsx", full.names=TRUE)
+
+for(i in filenames){
+  a <- read_xlsx(i)
+  new_name <- sub('.xlsx', '.csv', i, fixed = TRUE)
+  write_csv(a, new_name)}

@@ -1,0 +1,9 @@
+b <- read_excel("D:\\Avirata\\CPD Level 2\\Online training status\\Batches\\Allusers Raw files\\Level 2\\StatusReportlevel2-2018-11-13.xlsx")
+b <- b[,c(6,7,8,1,4,5,9)]
+b <- arrange(b, district, taluka, school_index)
+a <- distinct(b, district)
+# n <- group_nest(b,district, keep = T)
+n1 <- b %>%  group_split(district)
+names(n1) <- c(1:36)
+names(n1) <- a
+mapply(write.csv, n1,file=paste0(names(n1), '_data.csv'))

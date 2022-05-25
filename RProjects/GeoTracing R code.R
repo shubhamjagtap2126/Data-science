@@ -1,0 +1,7 @@
+﻿pacman::p_load(readxl, dplyr, writexl, readr,stringi,data.table) 
+mycoord<-read_xlsx("C:\\Users\\sakal\\Desktop\\book6.xlsx")
+colnames(mycoord)<- c("Schl","latitude","longitude")
+d<-dist(mycoord)
+h<-hclust(d)
+plot(h, lab=mycoord$Schl) 
+#last_plot() + coord_flip()coord_flip()

@@ -1,0 +1,88 @@
+---
+title: "Sample dataset assignment 3"
+author: "Shubham jagtap"
+date: "10/3/2019"
+output: html_notebook
+---
+
+### Import data
+importing dataset of **On-time data for all flights that departed NYC in 2013.**
+
+This dataset is taken fron one of the lectures of Hadley Wickham on [dplyr](https://dplyr.tidyverse.org/articles/dplyr.html).
+
+**number of rows in data = 3,36,776**,
+**number of variable columns = 19**
+
+```{r, error=F}
+# importing libraries
+pacman::p_load(tidyverse, dplyr, ggplot2,shiny, shinydashboard,
+               leaflet,stringr, lubridate, rmarkdown, knitr)
+
+# library(nycflights13)
+data <- nycflights13::flights
+
+# nycflights13::weather   # for the weather data connection
+# nycflights13::airlines  # for the airlines data connection
+# nycflights13::airports  # for the airports data connection
+# nycflights13::planes    # for the planes data connection
+# nrow(data) 
+head(data)
+```
+
+`colnames(data)`
+`typeof(data)`
+`summary(data)`
+`str(data)`
+`rownames(data)`
+
+```{r}
+colnames(data)
+
+# code to nest or split by group (Please ignore)
+# group_by(data, month) %>% nest(keep = T)
+# group_split(data, month, keep = T)
+# group_by(data, month) %>% group_nest(keep = T)
+```
+
+***
+
+**Frequent questions based on the dataset**
+
+1. Statistics of values per month (i.e. max, min, mean, total, percentage, etc) 
+(only for the destination LAX,BWI,ROC,DCA,PHL,DAY,GRR,SMF,BZN,CHO)
+    1. dep_delay, arr_delay, air_time, distance, etc
+    2. flights count per origins, dest places.
+    3. find out the most and least dep and arrival delay for month, carrier, dest and origin.
+
+```{r}
+statsset <- data %>% filter(dest== c('LAX','BWI','ROC','DCA','PHL','DAY','GRR','SMF','BZN','CHO'))
+# statsset %>% filter(dest== 'BWI') # to check the data
+# colnames(statsset) 
+summary(statsset[c(6,9,15,16)]) # summary of data
+#"dep_delay","arr_delay","air_time","distance"
+data.frame(summary, row.names = T,check.rows = T,stringsAsFactors = T)
+summary <- statsset %>% group_by(month=factor(month)) %>% select(6,9,15,16)
+# unique(statsset$month)
+colnames(summary)
+summary %>% group_by(month) %>%  max()
+summary <- tbl_df(summary)
+summary %>% group_by(month) %>% apply(fun=max, na.rm=T)
+# class(summary$dep_delay)
+```
+
+
+2. Visualization (only for the carrier YV, WN, US & B6)
+    1. Prepare the scatterplot of dep_delay, arr_delay
+    2. Histogram of statistics data as per month.
+    3. Prepare verious plots. 
+
+3. Regression and clustering models
+    1. relation between dep_delay and arr_delay
+    2. dep_ time vs dep_delay
+    3. arr_time vs arr_delay
+    4. distance vs airtime
+
+
+**Frequent questions other than dataset**
+
+1. merging the information of airlines, airports from the package and check the further analysis. use this information in visualizaion part.

@@ -1,0 +1,65 @@
+---
+title: "Sample dataset assignment"
+output: html_notebook
+author: Shubham Jagtap
+date: "10/3/2019"
+---
+
+### Import data
+importing [dataset](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/quakes.html) of Locations of Earthquakes in Fiji
+
+**number of rows in data = 1000**
+
+```{r ,echo=T}
+# importing dataset of Locations of Earthquakes off Fiji
+
+data <- quakes
+head(data)
+
+# info about the columns
+# [,1]	lat =	numeric	Latitude of event
+# [,2]	long =	numeric	Longitude
+# [,3]	depth =	numeric	Depth (km)
+# [,4]	mag =	numeric	Richter Magnitude
+# [,5]	stations =	numeric	Number of stations reporting
+
+```
+
+
+This are the top10 highly affected places
+```{r ,echo=T}
+# importing libraries
+pacman::p_load(tidyverse, dplyr, ggplot2,shiny, shinydashboard, leaflet, rvest,
+               stringr, lubridate, rmarkdown, knitr)
+
+top10mag <- data %>% top_n(10)  # max(data$mag) # to check the max value of mag.
+
+# showing the top 10 max values of magnitude on leaflet map
+leaflet(data = top10mag, options = leafletOptions(minZoom = 11)) %>%    
+        addTiles("locations of seismic events in fiji since 1964") %>% 
+        addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag))
+
+```
+***
+
+**Frequent questions based on the dataset**
+
+1. Find the top affected places by the earthquakes and locate them on map.
+2. Give the details of the depth, mag, stations in terms of following values.
+    1. maximum
+    2. minimum
+    3. average
+    4. locate all above values places on map.
+3. Find the clusters of places according to the seismic events given in data.
+4. Plot the various graph based on numeric values
+    1. plot the Histogram, Boxplot, Voilin graphs
+    2. scatter plot of depth and mag to show the relation between this values.
+
+
+**Frequent questions other than dataset**
+
+1. other information of those location such as
+    1. Population, Geography/topography,rescue places for emergency situation, etc.
+    2. Possibility of affecting other places because of one/more quakes situation.
+    3. information about the quakes and seismic events at two major plate as mentione in details of the datahelp.
+
