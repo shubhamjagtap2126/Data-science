@@ -1,0 +1,21 @@
+﻿pacman::p_load(readxl, dplyr, writexl, readr,stringi,data.table,random)
+n <- 10000
+
+F <- tbl_df(bind_cols(
+tbl_df(stri_rand_strings(n, 5, '[A-Za-z1-9]')),
+tbl_df(stri_rand_strings(n, 10, '[1-9]')),
+tbl_df(floor(runif(n,40,100))),
+tbl_df(floor(runif(n,40,100))),
+tbl_df(floor(runif(n,40,100))),
+tbl_df(floor(runif(n,40,100))),
+tbl_df(floor(runif(n,40,100))) ))
+
+names(F) <- c("Name","mobile","videos","Audio","ebook","notes","tests")
+F
+
+# "Class","Medium","Email","RegisteredAt","Role","Gender"
+
+#randomStrings(n=50, len=5, digits=FALSE, upperalpha=TRUE,
+         loweralpha=TRUE, unique=TRUE, check=TRUE)
+
+
