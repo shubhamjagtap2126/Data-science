@@ -1,0 +1,17 @@
+﻿#pip install -r PythonLibraries.txt
+#os.getcwd()
+
+NumPy
+Scrapy
+SciPy 
+Pandas
+Matplotlib 
+seaborn
+Keras
+SciKit-Learn
+PyTorch
+BeautifulSoup
+TensorFlow
+
+
+#E:\sakal\miniconda3\;E:\sakal\miniconda3\Scripts;E:\sakal\miniconda3\Library\bin;E:\sakal\miniconda3\Library\mingw-w64\bin;E:\sakal\miniconda3\Library\mingw-w64\lib;
