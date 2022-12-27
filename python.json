@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 { //https://snippet-generator.app/
+=======
+{ //https://snippet-generator.app/ Updates to check
+>>>>>>> 2a7d52ad325f3816887d002292342d0521f092ac
 	"BulkFilesDownloader": {
 		"prefix": "BulkFilesDownloader",
 		"body": [
